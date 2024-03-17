@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon } from "lucide-react"
+import { ArrowDownIcon, ArrowUpIcon, ImageIcon } from "lucide-react"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
@@ -26,7 +26,12 @@ const PostItem = () => {
         </Button>
       </div>
 
-      <div className="aspect-square shrink-0 rounded-md bg-muted md:h-24 md:w-24"></div>
+      <Link
+        href="/"
+        className="flex aspect-square shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground md:h-24 md:w-24"
+      >
+        <ImageIcon className="h-9 w-9" />
+      </Link>
 
       <div className="flex flex-col gap-1">
         <Link

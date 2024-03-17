@@ -14,7 +14,7 @@ const Header = ({ className, children }: HeaderProps) => {
         className,
       )}
     >
-      <div className="container mx-auto flex h-full items-center px-2 text-sm">
+      <div className="container mx-auto flex h-full items-center px-2 text-sm xl:px-0">
         {children}
       </div>
     </header>

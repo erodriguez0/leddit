@@ -15,7 +15,7 @@ const PostItem = () => {
           <ArrowUpIcon className="h-5 w-5" />
         </Button>
 
-        <span className="font-semibold tracking-tighter">1.7K</span>
+        <span className="font-semibold tracking-tighter">99.9K</span>
 
         <Button
           size="icon"

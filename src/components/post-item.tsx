@@ -10,7 +10,7 @@ const PostItem = () => {
         <Button
           size="icon"
           variant="outline"
-          className="h-8 w-8 hover:text-primary"
+          className="h-[2.125rem] w-[2.125rem] hover:text-primary"
         >
           <ArrowUpIcon className="h-5 w-5" />
         </Button>
@@ -20,7 +20,7 @@ const PostItem = () => {
         <Button
           size="icon"
           variant="outline"
-          className="h-8 w-8 hover:text-indigo-500"
+          className="h-[2.125rem] w-[2.125rem] hover:text-indigo-500"
         >
           <ArrowDownIcon className="h-5 w-5" />
         </Button>
@@ -28,15 +28,15 @@ const PostItem = () => {
 
       <Link
         href="/"
-        className="flex aspect-square shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground md:h-24 md:w-24"
+        className="flex aspect-square shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground md:h-[6.5rem] md:w-[6.5rem]"
       >
         <ImageIcon className="h-9 w-9" />
       </Link>
 
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <Link
           href="/"
-          className="text-base font-semibold tracking-tight"
+          className="pb-1 text-base font-semibold leading-5 tracking-tight"
         >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum dicta
           alias officiis consequuntur quae soluta, harum deserunt, saepe tempora
@@ -45,7 +45,7 @@ const PostItem = () => {
         </Link>
 
         <span className="hidden text-muted-foreground md:inline-block">
-          submitted by{" "}
+          submitted 7 hours ago by{" "}
           <Link
             href="/"
             className="font-medium text-foreground hover:underline"
@@ -59,7 +59,6 @@ const PostItem = () => {
           >
             liga_mx
           </Link>{" "}
-          7 hours ago
         </span>
 
         <div className="hidden gap-2 font-medium md:flex">

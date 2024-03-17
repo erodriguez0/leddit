@@ -2,7 +2,9 @@ import Link from "next/link"
 
 import { buttonVariants } from "@/components/ui/button"
 import Header from "@/components/ui/header"
+import { Input } from "@/components/ui/input"
 
+import SiteDrawer from "@/components/site-drawer"
 import ThemeToggle from "@/components/theme-toggle"
 
 import { cn } from "@/lib/utils"
@@ -20,6 +22,12 @@ const SiteHeader = () => {
       </div>
 
       <div className="ml-auto hidden items-center justify-end gap-2 md:flex">
+        <Input
+          type="search"
+          placeholder="Search leddit..."
+          className="h-9 w-80"
+        />
+
         <Link
           href="/auth/login"
           className={cn(buttonVariants({ size: "sm" }))}
@@ -35,6 +43,10 @@ const SiteHeader = () => {
         </Link>
 
         <ThemeToggle />
+      </div>
+
+      <div className="ml-auto flex items-center justify-end gap-2 md:hidden">
+        <SiteDrawer />
       </div>
     </Header>
   )

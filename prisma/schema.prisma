@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Vote_Type {
+  DOWN
+  UP
+}
+
+model User {
+  id         String   @id @default(uuid())
+  username   String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  subleddits    Subleddit[]
+  posts         Post[]
+  comments      Comment[]
+  post_votes    PostVote[]
+  comment_votes CommentVote[]
+}
+
+model Subleddit {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user_id String?
+  user    User?   @relation(fields: [user_id], references: [id])
+
+  posts Post[]
+}
+
+model Post {
+  id         String   @id @default(uuid())
+  title      String
+  url        String?
+  images     Image[]
+  body       String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user_id String?
+  user    User?   @relation(fields: [user_id], references: [id])
+
+  subleddit_id String?
+  subleddit    Subleddit? @relation(fields: [subleddit_id], references: [id])
+
+  comments Comment[]
+  votes    PostVote[]
+}
+
+model Comment {
+  id         String   @id @default(uuid())
+  body       String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user_id String?
+  user    User?   @relation(fields: [user_id], references: [id])
+
+  post_id String
+  post    Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
+
+  reply_id String?
+  reply    Comment? @relation("Reply", fields: [reply_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  replies Comment[]     @relation("Reply")
+  votes   CommentVote[]
+}
+
+model Image {
+  id         String   @id @default(uuid())
+  url        String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  post_id String
+  post    Post   @relation(fields: [post_id], references: [id])
+}
+
+model PostVote {
+  vote Vote_Type
+
+  post_id String
+  post    Post   @relation(fields: [post_id], references: [id], onDelete: Cascade)
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  @@id([post_id, user_id])
+}
+
+model CommentVote {
+  vote Vote_Type
+
+  comment_id String
+  comment    Comment @relation(fields: [comment_id], references: [id], onDelete: Cascade)
+
+  user_id String
+  user    User   @relation(fields: [user_id], references: [id])
+
+  @@id([comment_id, user_id])
+}

@@ -10,7 +10,7 @@ const Sidebar = ({ className, children }: SidebarProps) => {
   return (
     <aside
       className={cn(
-        "z-50 hidden w-80 flex-col gap-4 bg-background p-4 md:flex",
+        "z-50 hidden w-80 flex-col gap-4 bg-background p-4 lg:flex",
         className,
       )}
     >

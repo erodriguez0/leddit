@@ -1,3 +1,4 @@
+import { UserIcon } from "lucide-react"
 import Link from "next/link"
 
 import { buttonVariants } from "@/components/ui/button"
@@ -7,9 +8,12 @@ import { Input } from "@/components/ui/input"
 import SiteDrawer from "@/components/site-drawer"
 import ThemeToggle from "@/components/theme-toggle"
 
+import { getAuthSession } from "@/lib/auth"
 import { cn } from "@/lib/utils"
 
-const SiteHeader = () => {
+const SiteHeader = async () => {
+  const session = await getAuthSession()
+
   return (
     <Header>
       <div className="flex h-full items-center gap-2">
@@ -28,19 +32,39 @@ const SiteHeader = () => {
           className="h-9 w-80"
         />
 
-        <Link
-          href="/auth/login"
-          className={cn(buttonVariants({ size: "sm" }))}
-        >
-          Login
-        </Link>
+        {!session && (
+          <>
+            <Link
+              href="/auth/login"
+              className={cn(buttonVariants({ size: "sm" }))}
+            >
+              Login
+            </Link>
 
-        <Link
-          href="/auth/register"
-          className={cn(buttonVariants({ size: "sm", variant: "secondary" }))}
-        >
-          Sign Up
-        </Link>
+            <Link
+              href="/auth/register"
+              className={cn(
+                buttonVariants({ size: "sm", variant: "secondary" }),
+              )}
+            >
+              Sign Up
+            </Link>
+          </>
+        )}
+
+        {session && (
+          <>
+            <Link
+              href="/"
+              className={cn(
+                buttonVariants({ size: "icon", variant: "outline" }),
+                "h-9 w-9",
+              )}
+            >
+              <UserIcon className="h-4 w-4" />
+            </Link>
+          </>
+        )}
 
         <ThemeToggle />
       </div>

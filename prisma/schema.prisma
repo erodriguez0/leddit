@@ -7,17 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum User_Role {
+  ADMIN
+  MOD
+  USER
+}
+
 enum Vote_Type {
   DOWN
   UP
 }
 
 model User {
-  id         String   @id @default(uuid())
-  username   String   @unique
+  id         String    @id @default(uuid())
+  email      String    @unique
+  username   String    @unique
   password   String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  avatar     String?
+  role       User_Role @default(USER)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
 
   subleddits    Subleddit[]
   posts         Post[]
